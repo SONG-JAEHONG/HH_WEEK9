@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 		"kr.hhplus.be.server.user.infra.persistence",
 })
 @EntityScan(basePackages = "kr.hhplus.be.server")
-@EnableScheduling
+//@EnableScheduling
 public class ServerApplication {
 
 	public static void main(String[] args) {

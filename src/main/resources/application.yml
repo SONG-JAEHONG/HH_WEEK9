@@ -2,26 +2,27 @@ spring:
   application:
     name: hhplus
   profiles:
-    active: test
+    active: local
   datasource:
     name: HangHaePlusDataSource
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-        maximum-pool-size: 50
-        minimum-idle: 10
-        connection-timeout: 2000
-        max-lifetime: 60000
+      maximum-pool-size: 50
+      minimum-idle: 10
+      connection-timeout: 2000
+      max-lifetime: 60000
     driver-class-name: com.mysql.cj.jdbc.Driver
-  data :
+    url: jdbc:mysql://localhost:3306/hhplus?characterEncoding=UTF-8&serverTimezone=UTC
+    username: application
+    password: application
+
+  data:
     redis:
       host: 127.0.0.1
       port: 6379
+
   cache:
     type: redis
-
-redisson:
-  enabled: true
-
 
   jpa:
     open-in-view: false
@@ -35,18 +36,23 @@ redisson:
         timezone.default_storage: NORMALIZE_UTC
       jdbc.time_zone: UTC
 
-  logging:
-    level:
-    org.hibernate.SQL: DEBUG        # 실행 SQL 출력
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # 파라미터 값 바인딩 로그
-    org.springframework.data.jpa.repository.query: DEBUG  # JPA Repository 쿼리 로그
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    producer:
+      acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 1
+        spring.json.trusted.packages: "*"
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.data.jpa.repository.query: DEBUG
 
 
----
-spring.config.activate.on-profile: local, test
-
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/hhplus?characterEncoding=UTF-8&serverTimezone=UTC
-    username: application
-    password: application
+redisson:
+  enabled: true
