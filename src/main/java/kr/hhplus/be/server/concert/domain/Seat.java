@@ -112,4 +112,16 @@ public class Seat extends BaseTimeEntity {
 
     }
 
+    public void rollbackHold() {
+
+        if (this.status == SeatStatus.HOLDING) {
+            this.status = SeatStatus.AVAILABLE;
+            this.expireTime = null;
+            return;
+        }
+
+        if (this.status == SeatStatus.AVAILABLE) {
+            return;
+        }
+    }
 }

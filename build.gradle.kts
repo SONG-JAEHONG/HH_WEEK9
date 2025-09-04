@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
 	java
 	id("org.springframework.boot") version "3.4.1"
@@ -63,6 +65,13 @@ dependencies {
 
 	//validation
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+
+	//kafka
+
+	implementation ("org.springframework.kafka:spring-kafka")
+	implementation ("com.fasterxml.jackson.core:jackson-databind")
+
+
 
 
 

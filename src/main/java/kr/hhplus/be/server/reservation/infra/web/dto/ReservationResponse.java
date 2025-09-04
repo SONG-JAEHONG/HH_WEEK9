@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ReservationResponse {
-    private Long reservationId;
+    private Long trackingId;
     private Long seatId;
     private String status;
 }
